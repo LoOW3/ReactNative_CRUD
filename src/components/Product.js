@@ -46,7 +46,9 @@ const styles = StyleSheet.create({
         padding: 16,
         backgroundColor: '#fff',
         margin: 16,
-        borderRadius: 8
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: 'white',
     },
     emoji: {
         fontSize: 100

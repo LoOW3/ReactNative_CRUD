@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
-import { Button, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { Button, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground, Dimensions  } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { database } from '../config/fb';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Product from '../components/Product';
+import Gradient from '../img/gradient.jpg'
 
 
 
 export default function Home() {
     const navigation = useNavigation();
     const [products, setProducts] = useState([]);
+    let ScreenHeight = Dimensions.get("window").height;
 
     useLayoutEffect(() => {
       navigation.setOptions({
@@ -41,8 +43,16 @@ export default function Home() {
     },[])
   return (
       <ScrollView style={styles.container}> 
-      <Text style={styles.title}>Products</Text>
-      {products.map(p => <Product key={p.id} {...p}/>)}
+        <ImageBackground source={Gradient}
+          style={{
+            width: '100%', 
+            height: ScreenHeight,
+
+          }}
+        >
+          <Text style={styles.title}>Products</Text>
+          {products.map(p => <Product key={p.id} {...p}/>)}
+        </ImageBackground>
       </ScrollView>
   )
 }
@@ -50,12 +60,12 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroudColor: '#f5f3f9'
   },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
-    margin: 16
+    margin: 16,
+    color: 'white'
   },
   button: {
     backgroundColor: '#0fa5e9',
