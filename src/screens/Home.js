@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
-import { Button, Text, StyleSheet, View } from 'react-native'
+import { Button, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { database } from '../config/fb';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
@@ -13,7 +13,9 @@ export default function Home() {
 
     useLayoutEffect(() => {
       navigation.setOptions({
-        headerRight: () => <Button title='add' onPress={() => navigation.navigate('Add')}/>
+        headerRight: () => <TouchableOpacity  style={styles.button} onPress={() => navigation.navigate('Add')}>
+          <Text style={styles.buttonText}>Add</Text>
+        </TouchableOpacity>
       })
     }, [])
 
@@ -38,10 +40,10 @@ export default function Home() {
 
     },[])
   return (
-      <View style={styles.container}> 
+      <ScrollView style={styles.container}> 
       <Text style={styles.title}>Products</Text>
       {products.map(p => <Product key={p.id} {...p}/>)}
-      </View>
+      </ScrollView>
   )
 }
 
@@ -54,6 +56,17 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     margin: 16
+  },
+  button: {
+    backgroundColor: '#0fa5e9',
+    padding: 10,
+    marginVertical: 0,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#fff'
   }
-
 })
