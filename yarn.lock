@@ -1062,6 +1062,11 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
+"@expo-google-fonts/dancing-script@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/dancing-script/-/dancing-script-0.2.2.tgz#ba92e2811f3b8c24da1bb17dc2da2be41839dcfc"
+  integrity sha512-MgnP5j/oxOl/J49dDXhhjo++9j3tHCrVQWo93+Ko4wqZCDb0ontL2Xd1Bmi/d/mcLha0GUy7fqDDc4QqfjdLvg==
+
 "@expo/bunyan@4.0.0", "@expo/bunyan@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@expo/bunyan/-/bunyan-4.0.0.tgz#be0c1de943c7987a9fbd309ea0b1acd605890c7b"
