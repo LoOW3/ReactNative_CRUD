@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { database } from '../config/fb';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Product from '../components/Product';
-import Gradient from '../img/gradient.jpg'
+import Gradient from '../img/gradient.jpg';
 
 
 
@@ -17,7 +17,7 @@ export default function Home() {
       navigation.setOptions({
         headerRight: () => <TouchableOpacity  style={styles.button} onPress={() => navigation.navigate('Add')}>
           <Text style={styles.buttonText}>Add</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>,
       })
     }, [])
 
@@ -33,6 +33,7 @@ export default function Home() {
             name: doc.data().name,
             price: doc.data().price,
             isSold: doc.data().isSold,
+            stock: doc.data().stock,
             createAt: doc.data().createAt
           }))
         )
@@ -46,11 +47,11 @@ export default function Home() {
         <ImageBackground source={Gradient}
           style={{
             width: '100%', 
-            height: ScreenHeight,
+            minHeight: ScreenHeight,
 
           }}
         >
-          <Text style={styles.title}>Products</Text>
+          {/* <Text style={styles.title}>Products</Text> */}
           {products.map(p => <Product key={p.id} {...p}/>)}
         </ImageBackground>
       </ScrollView>
@@ -69,8 +70,9 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#0fa5e9',
-    padding: 10,
-    marginVertical: 0,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    marginTop: 8,
     borderRadius: 8,
     alignItems: 'center',
   },
