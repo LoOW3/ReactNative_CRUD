@@ -5,6 +5,7 @@ import { useFonts } from 'expo-font';
 
 import Home from "./screens/Home.js";
 import Add from "./screens/Add.js";
+import Add2 from './screens/Add2.js';
 
 
 const Stack = createNativeStackNavigator();
@@ -37,6 +38,16 @@ function MyStack() {
                     fontSize: 35,
                   }}}
             />
+            <Stack.Screen 
+                name='Camera' 
+                component={Add2}
+                options={{presentation: 'modal',
+                headerTitleStyle: {
+                    fontFamily: 'Dancing',
+                    fontSize: 35,
+                  }}}
+            />
+
         </Stack.Navigator>
     )
 }

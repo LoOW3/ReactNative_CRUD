@@ -5,6 +5,7 @@ import { database } from '../config/fb'
 import { collection, addDoc } from 'firebase/firestore'
 import { useNavigation } from '@react-navigation/native'
 import Gradient from '../img/gradient.jpg'
+import Add2 from './Add2'
 
 export default function Add() {
     const navigation = useNavigation();
@@ -30,6 +31,7 @@ export default function Add() {
             emoji: EmojiObject.emoji
         })
     };
+    
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -46,6 +48,9 @@ export default function Add() {
             <Text style={styles.emoji} onPress={() => setIsOpen(true)}>
                 {newItem.emoji}
             </Text>
+            <TouchableOpacity  style={styles.button} onPress={() => navigation.navigate('Camera')}>
+              <Text style={styles.buttonText}>Take a picture</Text>
+            </TouchableOpacity>
             <EmojiPicker 
               onEmojiSelected={handlePick}
               open={isOpen}
