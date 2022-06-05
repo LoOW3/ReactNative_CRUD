@@ -29,7 +29,7 @@ export default function Home() {
         setProducts(
           querySnapshot.docs.map(doc => ({
             id: doc.id,
-            emoji: doc.data().emoji,
+            img: doc.data().img,
             name: doc.data().name,
             price: doc.data().price,
             isSold: doc.data().isSold,
