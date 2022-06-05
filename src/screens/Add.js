@@ -1,18 +1,22 @@
-import { Text, View, ScrollView, StyleSheet, TextInput, Button,  ImageBackground, Dimensions, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { Text, View, ScrollView, StyleSheet, TextInput, Button,  ImageBackground, Dimensions, TouchableOpacity, Image } from 'react-native'
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import EmojiPicker from 'rn-emoji-keyboard'
 import { database } from '../config/fb'
 import { collection, addDoc } from 'firebase/firestore'
 import { useNavigation } from '@react-navigation/native'
 import Gradient from '../img/gradient.jpg'
 import Add2 from './Add2'
+import { deleteCloudURL } from '../redux/actions';
 
 export default function Add() {
+    let dispatch = useDispatch();
+    let imagen = useSelector((state) => state.cloudURL);
     const navigation = useNavigation();
     const [isOpen, setIsOpen] = useState(false);
     let ScreenHeight = Dimensions.get("window").height;
     const [newItem, setNewItem] = useState({
-        emoji: '🍩',
+        img: '',
         name: '',
         price: 0,
         isSold: false,
@@ -23,15 +27,8 @@ export default function Add() {
     const onSend = async() =>{
         await addDoc(collection(database, 'products'), newItem);
         navigation.goBack();
+        dispatch(deleteCloudURL())
     }
-
-    const handlePick = (EmojiObject) => {
-        setNewItem({
-            ...newItem,
-            emoji: EmojiObject.emoji
-        })
-    };
-    
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -45,19 +42,15 @@ export default function Add() {
         >
       <View style={styles.container}>
             <Text style={styles.title}>Add a new Product</Text>
-            <Text style={styles.emoji} onPress={() => setIsOpen(true)}>
+            {/* <Text style={styles.emoji} onPress={() => setIsOpen(true)}>
                 {newItem.emoji}
-            </Text>
-            <TouchableOpacity  style={styles.button} onPress={() => navigation.navigate('Camera')}>
-              <Text style={styles.buttonText}>Take a picture</Text>
+            </Text> */}
+            <TouchableOpacity onPress={() => navigation.navigate('Camera')}>
+            {imagen? <Image style={styles.emoji} source={{uri:imagen}} /> : <Image style={styles.emoji} source={require('../../assets/images/default-placeholder.png')} />}
             </TouchableOpacity>
-            <EmojiPicker 
-              onEmojiSelected={handlePick}
-              open={isOpen}
-              onClose={() => setIsOpen(false)}
-            />
+            <Text style={styles.buttonTextCamera} onPress={() => navigation.navigate('Camera')}>Take a picture</Text>
             <TextInput 
-              onChangeText={(text) => setNewItem({...newItem, name: text})}
+              onChangeText={(text) => setNewItem({...newItem, name: text, img: imagen})}
               placeholder='Porduct name'
               /* placeholderTextColor= 'white' */
               style={styles.inputContainer}
@@ -87,14 +80,14 @@ export default function Add() {
 
 const styles = StyleSheet.create({
     container: {
-      marginTop: 60,
+      marginTop: 10,
       flex: 1,
       borderColor: 'white',
       borderWidth: 1,
       alignItems: 'center',
       width: '90%',
       borderRadius: 6,
-      maxHeight: '69%',
+      maxHeight: '90%',
       backgroundColor: 'white'
 
     },
@@ -113,14 +106,15 @@ const styles = StyleSheet.create({
 
     },
     emoji: {
-        fontSize: 100,
+        width: 250,
+        height: 250,
         borderRadius: 6,
         padding: 10,
-        marginVertical: 6,
+        marginTop: 20,
 
     },
     button: {
-        marginTop: 30,
+        marginTop: 10,
         backgroundColor: '#0fa5e9',
         paddingVertical: 8,
         width: '90%',
@@ -134,6 +128,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff'
     },
+    buttonTextCamera:{
+      color: '#0fa5e9',
+      marginBottom: 20,
+      marginTop: 5
+    }
 
 
 
