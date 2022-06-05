@@ -1,11 +1,13 @@
 import React, { useState} from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Button, Image, } from 'react-native'
 import { database } from '../config/fb'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
 import { AntDesign } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Product({ id, emoji, name, price, isSold, stock}) {
+export default function Product({ id, img, name, price, isSold, stock}) {
+    const navigation = useNavigation();
     const [q, setQ] = useState(1)
     const [total,setTotal] = useState('')
     const onEdit = () => {
@@ -34,7 +36,7 @@ export default function Product({ id, emoji, name, price, isSold, stock}) {
   return (
     <View style={styles.productContainer}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={styles.emoji}>{emoji}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Image", {image: img})}><Image style={styles.emoji}  source={{uri:img}}/></TouchableOpacity>
             <AntDesign onPress={onDelete} name="delete"  size={26}/>
         </View>
         <View style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
@@ -83,7 +85,9 @@ const styles = StyleSheet.create({
         borderColor: 'white',
     },
     emoji: {
-        fontSize: 100
+        width: 100,
+        height: 100,
+        borderRadius: 8
     },
     name: {
         fontSize: 32,
