@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 import Home from "./screens/Home.js";
 import Add from "./screens/Add.js";
 import Add2 from './screens/Add2.js';
+import imageExpand from "./components/ImageExpand.js";
 
 
 const Stack = createNativeStackNavigator();
@@ -45,7 +46,19 @@ function MyStack() {
                 headerTitleStyle: {
                     fontFamily: 'Dancing',
                     fontSize: 35,
-                  }}}
+                  },
+                headerShown: false,}}
+            />
+            <Stack.Screen 
+                name='Image' 
+                component={imageExpand}
+                options={{presentation: 'modal',
+                headerTitleStyle: {
+                    fontFamily: 'Dancing',
+                    fontSize: 35,
+                  },
+                  headerShown: false
+                }}
             />
 
         </Stack.Navigator>
