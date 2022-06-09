@@ -11,6 +11,7 @@ export default function Add() {
     let dispatch = useDispatch();
     const theme = useSelector(state => state.theme)
     let imagen = useSelector((state) => state.cloudURL);
+    const userUid = useSelector(state => state.currentUser);
     const navigation = useNavigation();
     const [isOpen, setIsOpen] = useState(false);
     let ScreenHeight = Dimensions.get("window").height;
@@ -24,7 +25,7 @@ export default function Add() {
     })
 
     const onSend = async() =>{
-        await addDoc(collection(database, 'products'), newItem);
+        await addDoc(collection(database, `${userUid}`), newItem);
         navigation.goBack();
         dispatch(deleteCloudURL())
     }

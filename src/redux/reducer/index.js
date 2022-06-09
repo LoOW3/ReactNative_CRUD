@@ -1,6 +1,7 @@
 const initialState = {
     cloudURL: '',
-    theme: true
+    theme: true,
+    currentUser: ''
 }
 
 
@@ -20,6 +21,16 @@ export default function rootReducer (state = initialState, action){
             return{
                 ...state,
                 theme: !state.theme
+            }
+        case 'CURRENT_USER':
+            return{
+                ...state,
+                currentUser: action.payload
+            }
+        case 'LOG_OUT':
+            return{
+                ...state,
+                currentUser: ''
             }
         default: return state
     }

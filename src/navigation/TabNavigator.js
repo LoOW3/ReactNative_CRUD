@@ -31,7 +31,7 @@ function AppNavigation(){
 
 export default function BottomTabNavigator(){
   return(
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }} >
       <Stack.Screen 
         name="SignIn"
         component={SignIn}
@@ -39,7 +39,7 @@ export default function BottomTabNavigator(){
       <Stack.Screen 
         name='App'
         component={AppNavigation}
-        
+
       />
     </Stack.Navigator>
   )

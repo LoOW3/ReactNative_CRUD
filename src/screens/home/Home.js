@@ -11,6 +11,7 @@ import { styles } from './Styles';
 
 export default function Home() {
   const navigation = useNavigation();
+  const userUid = useSelector(state => state.currentUser)
   let dispatch = useDispatch();
   const theme = useSelector(state => state.theme)
   const [products, setProducts] = useState([]);
@@ -26,7 +27,7 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    const collectionRef = collection(database, 'products');
+    const collectionRef = collection(database, `${userUid}`);
     const q = query(collectionRef, orderBy('createAt', 'desc'));
 
     const unsuscribe = onSnapshot(q, querySnapshot => {

@@ -21,3 +21,19 @@ export function changeTheme(){
         })
     }
 } 
+
+export function currentUser(uid){
+    return async function(dispatch){
+        return dispatch({
+            type:'CURRENT_USER',
+            payload: uid
+        })
+    }
+}
+export function cleanCurrentUser(){
+    return async function(dispatch){
+        return dispatch({
+            type:'LOG_OUT',
+        })
+    }
+}

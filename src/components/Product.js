@@ -9,11 +9,12 @@ import { useSelector } from 'react-redux';
 
 export default function Product({ id, img, name, price, isSold, stock}) {
     const theme = useSelector(state => state.theme)
+    const userUid = useSelector(state => state.currentUser)
     const navigation = useNavigation();
     const [q, setQ] = useState(1)
     const [total,setTotal] = useState('')
     const onEdit = () => {
-        const docRef = doc(database, 'products', id);
+        const docRef = doc(database, `${userUid}`, id);
         updateDoc(docRef, {
             stock: stock - q
         })
@@ -21,7 +22,7 @@ export default function Product({ id, img, name, price, isSold, stock}) {
     }
 
     const onDelete = () => {
-        const docRef = doc(database, 'products', id);
+        const docRef = doc(database, `${userUid}`, id);
         deleteDoc(docRef)
     }
     const [loaded] = useFonts({
