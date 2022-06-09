@@ -5,8 +5,10 @@ import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
 import { AntDesign } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 export default function Product({ id, img, name, price, isSold, stock}) {
+    const theme = useSelector(state => state.theme)
     const navigation = useNavigation();
     const [q, setQ] = useState(1)
     const [total,setTotal] = useState('')
@@ -34,16 +36,16 @@ export default function Product({ id, img, name, price, isSold, stock}) {
         if(q > 1) setQ(q - 1)
     }
   return (
-    <View style={styles.productContainer}>
+    <View style={theme?styles.productContainer: styles.productContainerDark}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <TouchableOpacity onPress={() => navigation.navigate("Image", {image: img})}><Image style={styles.emoji}  source={{uri:img}}/></TouchableOpacity>
-            <AntDesign onPress={onDelete} name="delete"  size={26}/>
+            <AntDesign onPress={onDelete} style={theme?{color: 'black'} : {color: '#e1e1e1'}}name="delete"  size={26}/>
         </View>
         <View style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
             <View>
-                <Text style={styles.name}>{name}</Text>
-                <Text style={styles.price}>$ {price}</Text>
-                <Text style={styles.stock}>Stock: {stock? stock : 0}ud</Text>
+                <Text style={theme?styles.name: styles.nameDark}>{name}</Text>
+                <Text style={theme?styles.price: styles.priceDark}>$ {price}</Text>
+                <Text style={theme?styles.stock: styles.stockDark}>Stock: {stock? stock : 0}ud</Text>
             </View>
             <View style= {{alignItems: 'center'}}>
                 <View style={styles.containerQuatity}>
@@ -56,7 +58,7 @@ export default function Product({ id, img, name, price, isSold, stock}) {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <Text style={styles.total}>Total: ${price * q}</Text>
+                    <Text style={theme?styles.total: styles.totalDark}>Total: ${price * q}</Text>
                 </View>
             </View>
         </View>
@@ -81,8 +83,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         margin: 16,
         borderRadius: 8,
-        borderWidth: 1,
-        borderColor: 'white',
+    },
+    productContainerDark: {
+        padding: 16,
+        backgroundColor: '#141414',
+        margin: 16,
+        borderRadius: 8,
     },
     emoji: {
         width: 100,
@@ -93,14 +99,28 @@ const styles = StyleSheet.create({
         fontSize: 32,
         fontWeight: 'bold'
     },
+    nameDark: {
+        fontSize: 32,
+        fontWeight: 'bold',
+        color: '#e1e1e1'
+    },
     price: {
         fontSize: 20,
         color: 'gray'
+    },
+    priceDark: {
+        fontSize: 20,
+        color: '#999'
     },
     stock: {
         fontSize: 15,
         fontWeight: 'bold',
         color: 'grey'
+    },
+    stockDark: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#999'
     },
     button: {
         backgroundColor: '#0fa5e9',
@@ -132,5 +152,9 @@ const styles = StyleSheet.create({
     total: {
         marginTop: 5,
         color: 'grey'
+    },
+    totalDark: {
+        marginTop: 5,
+        color: '#999'
     }
 })

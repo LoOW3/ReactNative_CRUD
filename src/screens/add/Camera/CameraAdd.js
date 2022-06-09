@@ -5,10 +5,11 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image
+  Image,
+  StatusBar
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { getCloudURL } from '../redux/actions';
+import { getCloudURL } from '../../../redux/actions';
 import { Camera } from 'expo-camera';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -16,7 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 const CAPTURE_SIZE = Math.floor(WINDOW_HEIGHT * 0.08);
 
-export default function Add2() {
+export default function CameraAdd() {
   let dispatch = useDispatch();
   const navigation = useNavigation();
   const cameraRef = useRef();
@@ -30,6 +31,10 @@ export default function Add2() {
   useEffect(() => {
     onHandlePermission();
   }, []);
+  useEffect(() => {
+  navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" }});
+  return () => navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+}, [navigation]);
 
   const onSnap = async () => {
     if (cameraRef.current) {
@@ -106,6 +111,7 @@ export default function Add2() {
 
   return (
     <View style={styles.container}>
+      <StatusBar translucent backgroundColor="transparent" />
       <Camera
         ref={cameraRef}
         style={loading?[styles.camContainer,{ opacity: 0.7 }] :styles.camContainer}
@@ -116,7 +122,7 @@ export default function Add2() {
   <View style={styles.container}>
   {isPreview && (
     <View style={styles.bottomButtonsContainer2}>
-        {loading?<View><Image style={styles.loading} source={require('../../assets/images/loading-unscreen.gif')}/></View>: <Text style={{height: 0}}>.</Text>}
+        {loading?<View><Image style={styles.loading} source={require('../../../../assets/images/loading-unscreen.gif')}/></View>: <Text style={{height: 0}}>.</Text>}
       <View style={{flexDirection: 'row', width: '100%', justifyContent: 'space-around'}}>
         <TouchableOpacity
           onPress={acceptPhoto}
@@ -225,7 +231,8 @@ const styles = StyleSheet.create({
   },
   switchCamera: {
     zIndex: 40,
-    marginTop: 695,
+    top: 659,
+    marginRight: 220,
     paddingRight: 20,
     alignItems: 'flex-end'
   },

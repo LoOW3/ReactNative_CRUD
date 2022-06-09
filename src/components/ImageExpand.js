@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, ImageBackground, Dimensions, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Gradient from '../img/gradient.jpg';
-import { AntDesign } from '@expo/vector-icons';
+import MaterialCommunityIcons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
 export default function ImageExpand(props) {
@@ -11,16 +11,16 @@ export default function ImageExpand(props) {
     <View style={{height: '100%',width: '100%',alignItems: 'center', justifyContent: 'center', backgroundColor: '#000'}}>
       <Image source={{uri: props.route.params.image }}
         style={{
-          width: '90%', 
-          height: '90%',
-          borderRadius: 10
+          width: '100%',
+          height: undefined,
+          aspectRatio: 1,
         }}
       />
       <TouchableOpacity
         onPress={()=> navigation.navigate('Products')}
         style={styles.closeButton}
       >
-        <AntDesign name='close' size={15} color='#fff' />
+        <MaterialCommunityIcons name="arrow-back-outline" style={styles.back} />
       </TouchableOpacity>
     </View>
   )
@@ -30,13 +30,15 @@ const styles = StyleSheet.create({
   closeButton: {
     position: 'absolute',
     top: 45,
-    right: 25,
+    left: 10,
     height: 30,
     width: 30,
-    borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FF0000',
     opacity: 1
   },
+  back:{
+    fontSize: 30,
+    color: 'white'
+  }
 })

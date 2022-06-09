@@ -14,3 +14,10 @@ export function deleteCloudURL(){
         })
     }
 } 
+export function changeTheme(){
+    return async function(dispatch){
+        return dispatch({
+            type:'CHANGE_THEME'
+        })
+    }
+} 

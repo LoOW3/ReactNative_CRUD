@@ -1,5 +1,6 @@
 const initialState = {
-    cloudURL: ''
+    cloudURL: '',
+    theme: true
 }
 
 
@@ -14,6 +15,11 @@ export default function rootReducer (state = initialState, action){
             return{
                 ...state,
                 cloudURL: ''
+            }
+        case 'CHANGE_THEME':
+            return{
+                ...state,
+                theme: !state.theme
             }
         default: return state
     }
