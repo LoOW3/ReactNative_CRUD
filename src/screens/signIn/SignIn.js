@@ -75,7 +75,7 @@ export default function SignIn() {
             </ScrollView>
             :
             <ScrollView style={styles.container} contentContainerStyle={{alignItems: 'center'}}>
-                <Text style={theme?styles.title:styles.titleDark}>Welcome back!</Text>
+                <Text style={theme?styles.title:styles.titleDark}>Log In</Text>
                 <TextInput placeholder='Email' value={email} onChangeText={text => setEmail(text)} placeholderTextColor='#999'style={theme?styles.textInput:styles.textInputDark}/>
                 {error.email?<Text style={styles.errorText}>{error.email}</Text>:<Text> </Text>}
                 <TextInput placeholder='Password' value={password} onChangeText={text => setPassword(text)} placeholderTextColor='#999' secureTextEntry={true} style={theme?styles.textInput:styles.textInputDark}/>

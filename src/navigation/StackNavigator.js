@@ -20,7 +20,7 @@ function MyStack() {
         return null;
       }
     return( 
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Products">
             <Stack.Screen 
                 name='Products' 
                 component={Home}

@@ -35,7 +35,7 @@ export default function Add() {
     }, [navigation]); */
 
   return (
-    <ScrollView style={theme?{backgroundColor: '#f6f2fc',
+    <ScrollView style={theme?{backgroundColor: 'white',
             width: '100%', 
             paddingVertical: 10} : 
             {backgroundColor: '#000'

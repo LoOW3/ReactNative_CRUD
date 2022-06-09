@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useContext } from 'react'
-import { Button, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Switch } from 'react-native'
+import { Button, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Switch, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { database } from '../../config/fb';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
@@ -49,8 +49,15 @@ export default function Home() {
   },[])
 
   return (
-      <ScrollView style={theme?styles.container : styles.containerDark}> 
-          {products.map(p => <Product key={p.id} {...p}/>)}
+      <ScrollView style={theme?styles.container : styles.containerDark} > 
+      
+        {products.length === 0? 
+          <View style={{width: '100%', height: 500, alignItems: 'center', justifyContent: 'center',}}>
+            <Text style={theme?{fontSize:20, color: 'black' }:{fontSize:20, color: 'white' }}>Cargando...</Text>
+          </View>
+          : 
+          products.map(p => <Product key={p.id} {...p}/>)
+        }
       </ScrollView>
   )
 }
