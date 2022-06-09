@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
   switchCamera: {
     zIndex: 40,
-    top: 659,
+    top: 695,
     marginRight: 220,
     paddingRight: 20,
     alignItems: 'flex-end'

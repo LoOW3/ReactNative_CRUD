@@ -1,5 +1,5 @@
 import { Text, View, ScrollView, StyleSheet, TextInput, Button,  ImageBackground, Dimensions, TouchableOpacity, Image } from 'react-native'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { database } from '../../config/fb'
 import { collection, addDoc } from 'firebase/firestore'
@@ -28,6 +28,10 @@ export default function Add() {
         navigation.goBack();
         dispatch(deleteCloudURL())
     }
+/*     useEffect(() => {
+      navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" }});
+      return () => navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+    }, [navigation]); */
 
   return (
     <ScrollView style={theme?{backgroundColor: '#f6f2fc',
