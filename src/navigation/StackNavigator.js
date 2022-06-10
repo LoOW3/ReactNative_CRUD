@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer, DarkTheme, DefaultTheme } from "@react-navigation/native";
 import { useFonts } from 'expo-font';
-
+import { useNavigation } from '@react-navigation/native';
 import Home from "../screens/home/Home.js";
 import Add from "../screens/add/Add.js";
 import CameraAdd from '../screens/add/Camera/CameraAdd.js';
@@ -29,7 +29,8 @@ function MyStack() {
                     fontFamily: 'Dancing',
                     fontSize: 35,
                   },
-                  headerTitleAlign: 'center'}}
+                  headerTitleAlign: 'center',
+                headerBackVisible: false}}
             />
             <Stack.Screen 
                 name='Add' 

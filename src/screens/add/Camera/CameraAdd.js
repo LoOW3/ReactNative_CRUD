@@ -31,10 +31,7 @@ export default function CameraAdd() {
   useEffect(() => {
     onHandlePermission();
   }, []);
-  useEffect(() => {
-  navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" }});
-  return () => navigation.getParent()?.setOptions({ tabBarStyle: undefined });
-}, [navigation]);
+  
 
   const onSnap = async () => {
     if (cameraRef.current) {
