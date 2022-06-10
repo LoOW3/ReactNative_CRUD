@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { database } from '../../config/fb';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Product from '../../components/Product';
+import CategorySelect from '../../components/CategorySelect';
 import { useDispatch, useSelector } from 'react-redux';
 import { styles } from './Styles';
 
@@ -15,6 +16,8 @@ export default function Home() {
   let dispatch = useDispatch();
   const theme = useSelector(state => state.theme)
   const [products, setProducts] = useState([]);
+  const [filteredCategories, setFilteredCategories] = useState()
+  const [categories, setCategories] = useState([]);
   const [mode,setMode] = useState(false)
   let ScreenHeight = Dimensions.get("window").height;
 
@@ -47,10 +50,35 @@ export default function Home() {
     return unsuscribe
     
   },[])
+  
+  useEffect(() => {
+    const collectionRef = collection(database, 'categories');
+    const q = query(collectionRef);
+    const unsuscribe = onSnapshot(q, querySnapshot => {
+      setCategories(
+/*          querySnapshot.docs.map(doc =>({
+          name: doc.data().categories
+         })) */
+         querySnapshot.docs.map(doc =>({
+          name: doc.data().categories
+         }))
 
+         )
+        })
+        
+        return unsuscribe
+        
+      },[])
+
+  const filterByCategory = () => {
+   
+  }
+      
   return (
       <ScrollView style={theme?styles.container : styles.containerDark} > 
-      
+        <ScrollView style={{height: 45, marginTop: 10,}} horizontal={true} contentContainerStyle={{alignItems: 'center'}}>
+          {categories[0]? categories[0].name.map(c => <CategorySelect name={c} key={c} onPress={filterByCategory}/>): <></>}
+        </ScrollView>
         {products.length === 0? 
           <View style={{width: '100%', height: 500, alignItems: 'center', justifyContent: 'center',}}>
             <Text style={theme?{fontSize:20, color: 'black' }:{fontSize:20, color: 'white' }}>Cargando...</Text>

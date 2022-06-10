@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 
     container: {
-        marginTop: 10,
+        marginTop: 0,
         flex: 1,
         borderColor: 'white',
         borderWidth: 1,
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
           width: '90%',
           padding: 13,
           marginVertical: 6,
-          borderWidth: 1,
+          borderBottomWidth: 1,
           borderColor: '#e1e1e1',
           borderRadius: 6,
       },
@@ -77,6 +77,14 @@ const styles = StyleSheet.create({
         color: '#0fa5e9',
         marginBottom: 20,
         marginTop: 5
+      },
+      picker:{
+        height: 30,
+        width: '90%',
+        padding: 13,
+        marginVertical: 6,
+        color: '#666',
+        fontSize: 20,
       }
   
    
