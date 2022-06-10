@@ -2,10 +2,14 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-export default function CategorySelect({name}) {
-    const theme = useSelector(state => state.theme)
+export default function CategorySelect({name, setFiltered, filtered, products}) {
+    const theme = useSelector(state => state.theme);
+
+    function filterByCategory(){
+        setFiltered(products.filter(p=> p.category === name))
+    }
   return (
-    <TouchableOpacity style={theme?styles.container : styles.containerDark}>
+    <TouchableOpacity style={theme?styles.container : styles.containerDark} onPress={() => filterByCategory()}>
       <Text style={theme?styles.text : styles.textDark}>{name}</Text>
     </TouchableOpacity>
   )

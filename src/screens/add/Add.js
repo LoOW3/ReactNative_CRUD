@@ -32,10 +32,10 @@ export default function Add() {
         navigation.goBack();
         dispatch(deleteCloudURL())
     }
-/*     useEffect(() => {
+    useEffect(() => {
       navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" }});
       return () => navigation.getParent()?.setOptions({ tabBarStyle: undefined });
-    }, [navigation]); */
+    }, [navigation]);
   return (
     <ScrollView style={theme?{backgroundColor: 'white',
             width: '100%', 
@@ -75,9 +75,10 @@ export default function Add() {
               <Picker
                 selectedValue={newItem.category}
                 style={styles.picker}
-                onValueChange={(itemValue, itemIndex) =>
-                  setNewItem({...newItem, category: itemValue})
+                onValueChange={(itemValue, itemIndex) =>{
+                  if(itemValue != 0) setNewItem({...newItem, category: itemValue})}
                 }>
+                <Picker.Item  label="Category..." value="0" />
                 <Picker.Item  label="Electronica" value="Electronica" />
                 <Picker.Item  label="Mascotas" value="Mascotas" />
                 <Picker.Item  label="Bebidas" value="Bebidas" />

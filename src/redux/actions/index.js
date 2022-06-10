@@ -1,3 +1,6 @@
+import { database } from '../../config/fb';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { useState } from 'react';
 
 export function getCloudURL(data){
     return async function(dispatch){

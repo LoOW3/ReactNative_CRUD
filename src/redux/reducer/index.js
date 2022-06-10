@@ -1,7 +1,7 @@
 const initialState = {
     cloudURL: '',
     theme: true,
-    currentUser: ''
+    currentUser: '',
 }
 
 
