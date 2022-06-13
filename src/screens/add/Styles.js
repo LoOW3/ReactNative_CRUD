@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
         width: '95%',
         borderRadius: 6,
         height: '95%',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        paddingBottom: 20
       },
       containerDark: {
         marginTop: 10,
@@ -20,7 +21,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: '95%',
         height: '95%',
-        backgroundColor: '#000'
+        backgroundColor: '#000',
+        paddingBottom: 20
       },
       title: {
           marginTop: 5,
