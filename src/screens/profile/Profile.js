@@ -102,7 +102,7 @@ export default function Profile() {
   }
   return (
     <View style={styles.container}>
-      <View style={styles.infoUser}>
+      <View style={theme?styles.infoUser : styles.infoUserDark}>
         <View style={styles.photo}>
           {
             onEdit?
@@ -119,11 +119,11 @@ export default function Profile() {
         <View style={styles.nameEmail}>
           {
             onEdit?
-            <View style={{flexDirection:'row', alignItems: 'flex-end'}}><TextInput style={styles.titleEdit} value={editInfo.name} onChangeText={(text) => setEditInfo({...editInfo ,name: text})}/>
+            <View style={{flexDirection:'row', alignItems: 'flex-end'}}><TextInput style={theme? styles.titleEdit : styles.titleEditDark} value={editInfo.name} onChangeText={(text) => setEditInfo({...editInfo ,name: text})}/>
               <Icon name='pencil-outline' color={'#999'} size={25} style={{paddingLeft: 5}}/></View> : 
-            <Text style={styles.title}>{userAuth}</Text>
+            <Text style={theme? styles.title : styles.titleDark}>{userAuth}</Text>
           }
-          <Text style={styles.caption}>{currentUser.email}</Text>
+          <Text style={theme?styles.caption : styles.captionDark}>{currentUser.email}</Text>
           {
             onEdit?
             <Text style={styles.edit} onPress={() => [setOnEdit(!onEdit), submitName(editInfo.name)]}>Save changes</Text>:
@@ -131,8 +131,8 @@ export default function Profile() {
           }
         </View>
       </View>
-      <ScrollView style={styles.basket}>
-
+      <ScrollView style={theme? styles.basket : styles.basketDark} contentContainerStyle={{alignItems: 'center', justifyContent: 'center'}}>
+          <Text style={theme?styles.caption : styles.captionDark}>Soon...</Text>
       </ScrollView>
     </View>
   )

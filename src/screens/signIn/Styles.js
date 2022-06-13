@@ -3,14 +3,10 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 
     supremeContainer:{
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: 'white',
         height: '100%'
     },
     supremeContainerDark:{
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: 'black',
         height: '100%'
     },
@@ -18,6 +14,7 @@ const styles = StyleSheet.create({
         marginTop: 100,
         width: '90%',
         borderRadius: 6,
+        paddingBottom: 20
     },
     title:{
         

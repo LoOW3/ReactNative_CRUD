@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useContext } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { Button, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Switch, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { database } from '../../config/fb';
@@ -28,6 +28,7 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
+    if(userUid){
     const collectionRef = collection(database, `${userUid}`);
     const q = query(collectionRef, orderBy('createAt', 'desc'));
     const unsuscribe = onSnapshot(q, querySnapshot => {
@@ -56,9 +57,11 @@ export default function Home() {
         }))
         )
       })
-    return unsuscribe
+      return unsuscribe
+    }
   },[])
   useEffect(() => {
+    if(userUid){
     const collectionRef = collection(database, 'categories');
     const q = query(collectionRef);
     const unsuscribe = onSnapshot(q, querySnapshot => {
@@ -72,7 +75,7 @@ export default function Home() {
         
         return unsuscribe
         
-      },[])
+      }},[])
 
   return (
     <View style={{height: '100%', width: '100%'}}>
