@@ -2,12 +2,13 @@ import React, { useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Button, Image, } from 'react-native'
 import { database } from '../config/fb'
 import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
-import { AntDesign } from '@expo/vector-icons';
+
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/Ionicons'
 
-export default function Product({ id, img, name, price, isSold, stock}) {
+export default function Product({ id, img, name, price, isSold, stock }) {
     const theme = useSelector(state => state.theme)
     const userUid = useSelector(state => state.currentUser)
     const navigation = useNavigation();
@@ -24,6 +25,7 @@ export default function Product({ id, img, name, price, isSold, stock}) {
     const onDelete = () => {
         const docRef = doc(database, `${userUid}`, id);
         deleteDoc(docRef)
+
     }
     const [loaded] = useFonts({
         PoppinsBold: require('../../assets/fonts/Poppins-Bold.ttf'),
@@ -40,7 +42,7 @@ export default function Product({ id, img, name, price, isSold, stock}) {
     <View style={theme?styles.productContainer: styles.productContainerDark}>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <TouchableOpacity onPress={() => navigation.navigate("Image", {image: img})}><Image style={styles.emoji}  source={{uri:img}}/></TouchableOpacity>
-            <AntDesign onPress={onDelete} style={theme?{color: 'black'} : {color: '#e1e1e1'}}name="delete"  size={26}/>
+            <Icon onPress={onDelete} style={theme?{color: 'black'} : {color: '#e1e1e1'}} name="trash-outline"  size={26}/>
         </View>
         <View style={{flexDirection: 'row', alignItems: 'center',justifyContent: 'space-between'}}>
             <View>
