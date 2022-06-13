@@ -14,6 +14,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/Ionicons';
 const Stack = createNativeStackNavigator();
 
 function MyStack() {
+  const theme = useSelector(state => state.theme)
   const navigation = useNavigation();
     const [loaded] = useFonts({
         Dancing: require('../../assets/fonts/DancingScript-SemiBold.ttf'),
@@ -35,7 +36,7 @@ function MyStack() {
                 headerBackVisible: false,
                 headerLeft:() => (
                   <TouchableOpacity style={{borderWidth: 0, height: 40,justifyContent:'flex-end'}}onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-                    <MaterialCommunityIcons name="menu-outline" size={30} color="black"  />
+                    <MaterialCommunityIcons name="menu-outline" size={30} color={theme?"black" : 'white'}  />
                   </TouchableOpacity>
                 )}}
             />
@@ -78,6 +79,7 @@ function MyStack() {
 
 function ProfileStackNavigator(){
   const navigation = useNavigation();
+  const theme = useSelector(state => state.theme)
     const [loaded] = useFonts({
         Dancing: require('../../assets/fonts/DancingScript-SemiBold.ttf'),
       });
@@ -97,7 +99,7 @@ function ProfileStackNavigator(){
               headerTitleAlign: 'center',
               headerLeft:() => (
                 <TouchableOpacity  style={{borderWidth: 0, height: 40,justifyContent:'flex-end'}} onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-                  <MaterialCommunityIcons name="menu-outline" size={30} color="black" />
+                  <MaterialCommunityIcons name="menu-outline" size={30} color={theme?"black" : 'white'}  />
                 </TouchableOpacity>
               )}} 
             />

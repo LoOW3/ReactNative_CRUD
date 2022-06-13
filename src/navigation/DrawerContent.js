@@ -26,6 +26,7 @@ import { signOut, getAuth } from "firebase/auth";
 export default function DrawerContent(props) {
     const auth = getAuth();
     const currentUser = auth.currentUser;
+    const theme = useSelector(state => state.theme)
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const user = useSelector(state => state.currentUser)
@@ -57,8 +58,8 @@ export default function DrawerContent(props) {
                         size={50}
                     />
                     <View style={{marginLeft: 15}}>
-                        <Title style={styles.title}>{currentUser? currentUser.providerData[0].displayName: 'Unknown'}</Title>
-                        <Caption style={styles.caption}>{currentUser?currentUser.providerData[0].email : ''}</Caption>
+                        <Title style={theme? styles.title : styles.titleDark}>{currentUser? currentUser.providerData[0].displayName: 'Unknown'}</Title>
+                        <Caption style={theme? styles.caption : styles.captionDark}>{currentUser?currentUser.providerData[0].email : ''}</Caption>
                     </View>
                 </View>
             </View>
@@ -66,7 +67,7 @@ export default function DrawerContent(props) {
                 <DrawerItem 
                     icon={(color,size) =>(
                         <Icon name='home-outline'
-                        color={color}
+                        color={theme? 'black' : 'white'}
                         size={20}
                         />
                         )}
@@ -76,7 +77,7 @@ export default function DrawerContent(props) {
                 <DrawerItem 
                     icon={(color,size) =>(
                         <Icon name='person-outline'
-                        color={color}
+                        color={theme? 'black' : 'white'}
                         size={20}
                         />
                     )}
@@ -84,10 +85,12 @@ export default function DrawerContent(props) {
                     onPress={()=> {navigation.navigate('ProfileTab')}}
                 />
             </Drawer.Section>
-            <Drawer.Section title='Preferences'>
+            <Drawer.Section title={
+                <Text style={theme? {} : {color: '#fff'}}>Preferences</Text>
+              } >
                 <TouchableRipple onPress={changeThemeApp}>
                     <View style={styles.preference}>
-                        <Text>Dark Theme</Text>
+                        <Text style={theme? {} : {color: '#e1e1e1'}}>Dark Theme</Text>
                         <View pointerEvents='none'>
                             <Switch value={isDark}/>
                         </View>
@@ -96,11 +99,11 @@ export default function DrawerContent(props) {
             </Drawer.Section>
         </View>
       </DrawerContentScrollView>
-      <Drawer.Section style={styles.bottomDeawerSection}>
+      <Drawer.Section style={theme? styles.bottomDeawerSection : styles.bottomDeawerSectionDark}>
         <DrawerItem 
             icon={(color,size) =>(
                 <Icon name='log-out-outline'
-                color={color}
+                color={theme? 'black' : 'white'}
                 size={25}
                 />
                 )}
@@ -124,9 +127,20 @@ const styles = StyleSheet.create({
         marginTop: 3,
         fontWeight: 'bold'
     },
+    titleDark:{
+        fontSize: 16,
+        marginTop: 3,
+        fontWeight: 'bold',
+        color: '#e1e1e1'
+    },
     caption: {
         fontSize: 14,
         lineHeight: 14
+    },
+    captionDark: {
+        fontSize: 14,
+        lineHeight: 14,
+        color: '#e1e1e1'
     },
     row: {
         marginTop: 20,
@@ -148,6 +162,11 @@ const styles = StyleSheet.create({
     bottomDeawerSection: {
         marginBottom: 15,
         borderTopColor: '#f4f4f4',
+        borderTopWidth: 1
+    },
+    bottomDeawerSectionDark: {
+        marginBottom: 15,
+        borderTopColor: '#ccc',
         borderTopWidth: 1
     },
     preference: {

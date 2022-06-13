@@ -37,11 +37,11 @@ export default function BottomTabNavigator(){
         name="SignIn"
         component={SignIn}
         />}
-      <Stack.Screen 
+      {user !== ''?<Stack.Screen 
         name='App'
         component={AppNavigation}
         options={{gestureEnabled: false}}
-      />
+      /> : <></>}
     </Stack.Navigator>
   )
 }

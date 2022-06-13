@@ -1,5 +1,5 @@
 import { Text, View, ScrollView, StyleSheet, TextInput, Button,  ImageBackground, Dimensions, TouchableOpacity, Image } from 'react-native'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {Picker} from '@react-native-picker/picker';
 import { useSelector, useDispatch } from 'react-redux';
 import { database } from '../../config/fb'
@@ -10,6 +10,8 @@ import { styles } from './Styles';
 
 export default function Add() {
     let dispatch = useDispatch();
+    const ref_input2 = useRef();
+    const ref_input3 = useRef();
     const theme = useSelector(state => state.theme)
     let imagen = useSelector((state) => state.cloudURL);
     const userUid = useSelector(state => state.currentUser);
@@ -57,6 +59,8 @@ export default function Add() {
               placeholder='Porduct name'
               placeholderTextColor='#999'
               style={theme?styles.inputContainer : styles.inputContainerDark}
+              onSubmitEditing={() => ref_input2.current.focus()}
+              blurOnSubmit={false}
             />
             <TextInput 
               onChangeText={(text) => setNewItem({...newItem, price: text})}
@@ -64,6 +68,9 @@ export default function Add() {
               placeholderTextColor='#999'
               style={theme?styles.inputContainer : styles.inputContainerDark}
               keyboardType='number-pad'
+              onSubmitEditing={() => ref_input3.current.focus()}
+              ref={ref_input2}
+              blurOnSubmit={false}
             />
             <TextInput 
               onChangeText={(text) => setNewItem({...newItem, stock: text})}
@@ -71,6 +78,7 @@ export default function Add() {
               placeholderTextColor={theme?'#999': '#999' }
               style={theme?styles.inputContainer : styles.inputContainerDark}
               keyboardType='number-pad'
+              ref={ref_input3}
             />
               <Picker
                 selectedValue={newItem.category}
