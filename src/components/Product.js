@@ -25,7 +25,6 @@ export default function Product({ id, img, name, price, isSold, stock }) {
     const onDelete = () => {
         const docRef = doc(database, `${userUid}`, id);
         deleteDoc(docRef)
-
     }
     const [loaded] = useFonts({
         PoppinsBold: require('../../assets/fonts/Poppins-Bold.ttf'),
